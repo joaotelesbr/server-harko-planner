@@ -1,5 +1,4 @@
 interface IData {
-  text: string;
   eventName: string;
   userEmail: string;
   toEmail: string;

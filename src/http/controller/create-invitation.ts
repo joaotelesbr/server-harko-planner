@@ -6,7 +6,6 @@ import { InvalidCredentialsError } from "@/use-case/erros/invalid-credentials-er
 export async function invite(request: FastifyRequest, reply: FastifyReply) {
   const inviteBodySchema = z.object({
     eventName: z.string(),
-    descriptionEvent: z.string(),
     userEmail: z.string(),
     toEmail: z.string(),
     dateTime: z.string(),
@@ -14,19 +13,12 @@ export async function invite(request: FastifyRequest, reply: FastifyReply) {
   });
 
   try {
-    const {
-      eventName,
-      descriptionEvent,
-      userEmail,
-      toEmail,
-      dateTime,
-      meetingTime,
-    } = inviteBodySchema.parse(request.body);
+    const { eventName, userEmail, toEmail, dateTime, meetingTime } =
+      inviteBodySchema.parse(request.body);
 
     const createInvitationUseCase = makeCreateInvitationUseCase();
     await createInvitationUseCase.execute({
       eventName,
-      descriptionEvent,
       userEmail,
       toEmail,
       dateTime,

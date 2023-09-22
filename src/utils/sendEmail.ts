@@ -6,12 +6,11 @@ export async function sendEmail({
   eventName,
   toEmail,
   userEmail,
-  descriptionEvent,
   icsContent,
   icsFileName,
 }: IEmailData) {
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    service: env.DATABASE_SERVICE,
     auth: {
       user: env.DATABASE_EMAIL,
       pass: env.DATABASE_PASSWORD,
@@ -21,8 +20,7 @@ export async function sendEmail({
     from: env.DATABASE_EMAIL,
     to: toEmail,
     subject: `Harko - Convite para o evento:${eventName}`,
-    html: `<span>${descriptionEvent}</span>`,
-    // text: descriptionEvent,
+    html: `<span> ${eventName} </span>`,
     cc: userEmail,
   };
 
